@@ -1,0 +1,130 @@
+<mujoco model="cart-pole">
+  <include file="./common/skybox.xml"/>
+  <include file="./common/visual.xml"/>
+  <include file="./common/materials.xml"/>
+
+  <option timestep="0.01" integrator="RK4">
+    <flag contact="disable" energy="enable"/>
+  </option>
+
+  <default>
+    <default class="pole">
+      <joint type="hinge" axis="0 1 0"  damping="2e-6"/>
+      <geom type="capsule" fromto="0 0 0 0 0 1" size="0.045" material="self" mass=".5"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <light name="light" pos="0 0 6"/>
+    <camera name="fixed" pos="0 -4 1" zaxis="0 -1 0"/>
+    <camera name="lookatcart" mode="targetbody" target="cart_1" pos="0 -2 2"/>
+    <geom name="floor" pos="0 0 -.05" size="4 4 .2" type="plane" material="grid"/>
+	
+    <geom name="rail1_1" type="capsule" pos="0  .07 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+    <geom name="rail2_1" type="capsule" pos="0 -.07 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+	
+    <body name="cart_1" pos="0 0 1">
+      <joint name="slider_1" type="slide" limited="true" axis="1 0 0" range="-1.8 1.8" solreflimit=".08 1" damping="5e-4"/>
+      <geom name="cart_1" type="box" size="0.2 0.15 0.1" material="self"  mass="2"/>
+      <body name="pole_1" childclass="pole">
+        <joint name="hinge_1_1"/>
+        <geom name="pole_1_1"/>
+      </body>
+    </body>
+	
+	<geom name="rail1_2" type="capsule" pos="0  1.07 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+    <geom name="rail2_2" type="capsule" pos="0  0.93 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+	
+	<body name="cart_2" pos="0 1 1">
+      <joint name="slider_2" type="slide" limited="true" axis="1 0 0" range="-1.8 1.8" solreflimit=".08 1" damping="5e-4"/>
+      <geom name="cart_2" type="box" size="0.2 0.15 0.1" material="self"  mass="2"/>
+      <body name="pole_1_2" childclass="pole">
+        <joint name="hinge_1_2"/>
+        <geom name="pole_1_2"/>
+      </body>
+    </body>
+	
+	
+	<geom name="rail1_3" type="capsule" pos="0  2.07 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+    <geom name="rail2_3" type="capsule" pos="0  1.93 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+	
+	<body name="cart_3" pos="0 2 1">
+      <joint name="slider_3" type="slide" limited="true" axis="1 0 0" range="-1.8 1.8" solreflimit=".08 1" damping="5e-4"/>
+      <geom name="cart_3" type="box" size="0.2 0.15 0.1" material="self"  mass="2"/>
+      <body name="pole_1_3" childclass="pole">
+        <joint name="hinge_1_3"/>
+        <geom name="pole_1_3"/>
+      </body>
+    </body>
+	
+	<geom name="rail1_4" type="capsule" pos="0  3.07 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+    <geom name="rail2_4" type="capsule" pos="0  2.93 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+	
+	<body name="cart_4" pos="0 3 1">
+      <joint name="slider_4" type="slide" limited="true" axis="1 0 0" range="-1.8 1.8" solreflimit=".08 1" damping="5e-4"/>
+      <geom name="cart_4" type="box" size="0.2 0.15 0.1" material="self"  mass="2"/>
+      <body name="pole_1_4" childclass="pole">
+        <joint name="hinge_1_4"/>
+        <geom name="pole_1_4"/>
+      </body>
+    </body>
+	
+	<geom name="rail1_5" type="capsule" pos="0  4.07 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+    <geom name="rail2_5" type="capsule" pos="0  3.93 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+	
+	<body name="cart_5" pos="0 4 1">
+      <joint name="slider_5" type="slide" limited="true" axis="1 0 0" range="-1.8 1.8" solreflimit=".08 1" damping="5e-4"/>
+      <geom name="cart_5" type="box" size="0.2 0.15 0.1" material="self"  mass="2"/>
+      <body name="pole_1_5" childclass="pole">
+        <joint name="hinge_1_5"/>
+        <geom name="pole_1_5"/>
+      </body>
+    </body>
+	
+	<geom name="rail1_6" type="capsule" pos="0  -1.07 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+    <geom name="rail2_6" type="capsule" pos="0  -0.93 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+	
+	<body name="cart_6" pos="0 -1 1">
+      <joint name="slider_6" type="slide" limited="true" axis="1 0 0" range="-1.8 1.8" solreflimit=".08 1" damping="5e-4"/>
+      <geom name="cart_6" type="box" size="0.2 0.15 0.1" material="self"  mass="2"/>
+      <body name="pole_1_6" childclass="pole">
+        <joint name="hinge_1_6"/>
+        <geom name="pole_1_6"/>
+      </body>
+    </body>
+	
+	<geom name="rail1_7" type="capsule" pos="0  -2.07 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+    <geom name="rail2_7" type="capsule" pos="0  -1.93 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+	
+	<body name="cart_7" pos="0 -2 1">
+      <joint name="slider_7" type="slide" limited="true" axis="1 0 0" range="-1.8 1.8" solreflimit=".08 1" damping="5e-4"/>
+      <geom name="cart_7" type="box" size="0.2 0.15 0.1" material="self"  mass="2"/>
+      <body name="pole_1_7" childclass="pole">
+        <joint name="hinge_1_7"/>
+        <geom name="pole_1_7"/>
+      </body>
+    </body>
+	
+	<geom name="rail1_8" type="capsule" pos="0  -3.07 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+    <geom name="rail2_8" type="capsule" pos="0  -2.93 1" zaxis="1 0 0" size="0.02 2" material="decoration" />
+	
+	<body name="cart_8" pos="0 -3 1">
+      <joint name="slider_8" type="slide" limited="true" axis="1 0 0" range="-1.8 1.8" solreflimit=".08 1" damping="5e-4"/>
+      <geom name="cart_8" type="box" size="0.2 0.15 0.1" material="self"  mass="2"/>
+      <body name="pole_1_8" childclass="pole">
+        <joint name="hinge_1_8"/>
+        <geom name="pole_1_8"/>
+      </body>
+    </body>
+
+  </worldbody>
+
+  <actuator>
+    <motor name="slide_1" joint="slider_1" gear="10" ctrllimited="true" ctrlrange="-1 1" />
+  </actuator>
+  
+  <actuator>
+    <motor name="slide_2" joint="slider_2" gear="10" ctrllimited="true" ctrlrange="-1 1" />
+  </actuator>
+  
+</mujoco>

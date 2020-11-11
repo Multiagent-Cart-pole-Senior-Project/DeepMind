@@ -1,0 +1,53 @@
+Files Included:
+DeepMind_ViewingCartPole.py
+cartpole_2.py
+cartpole_2.xml
+__init__.py
+control.py
+cart_pole_states.npy
+
+Dependencies:
+dm_control
+numpy
+
+run as: "DeepMind_ViewingCartPole.py
+
+
+These files have been added or modified from the DeepMind Control Suite
+in order to view cart position and pole angle data for 8 cart pole systems
+using the viewer. This was done by importing the data using: numpy.load , on 
+".npy" files containing data for each agent. 
+
+This data is a 3D array where axis 0 is time, axis 1 is the agent number 
+(8 of them), and axis 2 is the single agent's states. State 0 is cart 
+position, state 1 is cart velocity, state 2 is pole angle, and state 3 
+is pole velocity. 
+
+To use the viewer, the cart postion and pole angle are directly sent to 
+control the cart. Though this is not the intended use, this allows us to 
+visualize the data over time. Once the program is run, a viewer window is 
+opened and this window can be recorded or screenshotted for use. In order 
+to start and stop the simulation, press the space key when the window is active.
+
+
+In order for this to work, there must be multiple files in the DeepMind 
+Control Suite that are modified. In order to easily return to the standard 
+DeepMind Control Suite, all of the code that was changed was added and old
+code was commented out so that it can be uncommented later. Instructions 
+and paths for these files are described below.
+
+
+
+Instructions on using files:
+
+	Navigate to: "Your Python Install"\Lib\site-packages\dm_control\suite
+
+	Replace: __init__.py and copy cartpole_2.py, cart_pole_states.npy, and cartpole_2.xml into this folder
+
+	Navigate to: "Your Python Install"\Lib\site-packages\dm_control\rl
+
+	Replace: control.py and cart_pole_states.npy in this folder
+
+	Run: DeepMind_ViewingCartPole.py
+
+
