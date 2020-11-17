@@ -4,6 +4,7 @@ import numpy as np
 
 env = suite.load(domain_name="cartpole", task_name="balance")
 action_spec = env.action_spec()
+observation_spec = env.observation_spec()
 
 # Initial Time Step
 time_step = env.reset()
@@ -37,7 +38,7 @@ theta = np.zeros(10001)
 # Define a linear control policy.
 def linear_control_policy(time_step):
   # Linear Control Gain
-  K = np.array([-12.2595, -2.5696, -0.3670, -0.7391])
+  K = np.array([-2500.3, -351.2143, -4400, -820.3857])
   
   # State Variables
   x_dot = time_step.observation['velocity'][0]
@@ -51,7 +52,7 @@ def linear_control_policy(time_step):
   
   # Apply Control Input
   time_step = env.step(u)
-  print("Angle = {}, Angular Velocity = {}".format(theta, theta_dot))   
+  print(u)   
   return u  
 
 # Launch the viewer application.
