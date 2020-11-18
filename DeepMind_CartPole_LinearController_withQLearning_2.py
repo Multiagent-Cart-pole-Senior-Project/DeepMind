@@ -6,17 +6,32 @@ from tqdm import tqdm
 import pickle
 import time
 
+# Version 2:
+#   Update the K step values
+#   Load old K values
+#   
+
 env = suite.load(domain_name="cartpole", task_name="balance")
 action_spec = env.action_spec()
 
 # Initial Time Step
 time_step = env.reset()
 
-# Initial Control Gains - From MATLAB Linear Model Simulation
-K = np.array([-12.2595, -2.5696, -0.3670, -0.7391])
-step = np.array([2, 1, 0.5, 0.1, 0.05, 0.01])
+# Initial Control Gains
+
+start_K = "K_1605710529.pickle" # or filename
+
+if start_K is None:
+    K = np.array([-12.2595, -2.5696, -0.3670, -0.7391]) # MATLAB Values
+else:
+    with open(start_K, "rb") as f:
+        K = pickle.load(f)
+        
+print(K)
+        
+step = np.array([20, 5, 0.5, 0.01])
 indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-EPOCHS = 6
+EPOCHS = 4
 
 for epoch in range(EPOCHS):
     print("EPOCH", epoch)
@@ -112,5 +127,5 @@ def linear_control_policy(time_step):
 viewer.launch(env, policy=linear_control_policy)
 
 # Save K
-with open(f"K-{int(time.time())}.pickle", "wb") as f:
+with open(f"K_{int(time.time())}.pickle", "wb") as f:
     pickle.dump(K, f)

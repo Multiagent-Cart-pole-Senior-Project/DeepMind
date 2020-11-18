@@ -52,7 +52,8 @@ def linear_control_policy(time_step):
   
   # Apply Control Input
   time_step = env.step(u)
-  print(u)   
+  print(u) 
+  
   return u  
 
 # Launch the viewer application.
