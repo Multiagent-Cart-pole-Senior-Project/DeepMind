@@ -6,11 +6,6 @@ from tqdm import tqdm
 import pickle
 import time
 
-# Version 2:
-#   Update the K step values
-#   Load old K values
-#   
-
 env = suite.load(domain_name="cartpole", task_name="balance")
 action_spec = env.action_spec()
 
@@ -19,7 +14,7 @@ time_step = env.reset()
 
 # Initial Control Gains
 
-start_K = "K_1605734803.pickle" # or filename
+start_K = None # or filename
 
 if start_K is None:
     K = np.array([-12.2595, -2.5696, -0.3670, -0.7391]) # MATLAB Values
@@ -29,9 +24,10 @@ else:
         
 print(K)
         
-step = np.array([20, 5, 0.5, 0.01])
+step = np.array([50_000, 10_000, 1000, 100, 20, 5, 0.5, 0.01])
 indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-EPOCHS = 4
+episodes_vec = [50_000, 50_000, 30_000, 30_000, 10_000, 10_000, 10_000, 10_000]
+EPOCHS = 8
 
 for epoch in range(EPOCHS):
     print("EPOCH", epoch)
@@ -49,9 +45,10 @@ for epoch in range(EPOCHS):
     # Run System with Q-learning to Optimize Control Gains
 
     # Parameters
-    Learning_Rate = 0.1
-    Discount = 0.99
-    Episodes = 20_000
+    Learning_Rate = 0.01
+    Discount = 0
+    Episodes = episodes_vec[epoch]
+    EPSILON = 0.95
 
     ep_rewards = []
 
@@ -59,15 +56,24 @@ for epoch in range(EPOCHS):
     for episode in tqdm(range(Episodes)):
         done = False
         episode_reward = 0.0
+        epsilon = EPSILON - (EPSILON * (episode/Episodes))
         
         # Reset Environment
         time_step = env.reset()
         
         # Determine Control gains for Episode or random gains
-        K1 = np.random.randint(0,10)
-        K2 = np.random.randint(0,10)
-        K3 = np.random.randint(0,10)
-        K4 = np.random.randint(0,10)
+        if np.random.random() > epsilon:
+            K_vec = np.unravel_index(np.argmax(Q), (11,11,11,11))
+            K1 = K_vec[0]
+            K2 = K_vec[1]
+            K3 = K_vec[2]
+            K4 = K_vec[3]
+        else:
+            K1 = np.random.randint(0,10)   
+            K2 = np.random.randint(0,10) 
+            K3 = np.random.randint(0,10) 
+            K4 = np.random.randint(0,10) 
+
             
         # Determine control gain vector
         K = np.array([q_1[K1], q_2[K2], q_3[K3], q_4[K4]])

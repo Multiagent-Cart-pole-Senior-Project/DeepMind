@@ -19,7 +19,7 @@ time_step = env.reset()
 
 # Initial Control Gains
 
-start_K = "K_1605734803.pickle" # or filename
+start_K = "K_1605878858.pickle" # None or filename
 
 if start_K is None:
     K = np.array([-12.2595, -2.5696, -0.3670, -0.7391]) # MATLAB Values
@@ -29,9 +29,9 @@ else:
         
 print(K)
         
-step = np.array([20, 5, 0.5, 0.01])
+step = np.array([1000, 100, 20, 5, 0.5, 0.01])
 indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-EPOCHS = 4
+EPOCHS = 6
 
 for epoch in range(EPOCHS):
     print("EPOCH", epoch)
@@ -51,7 +51,7 @@ for epoch in range(EPOCHS):
     # Parameters
     Learning_Rate = 0.1
     Discount = 0.99
-    Episodes = 20_000
+    Episodes = 30_000
 
     ep_rewards = []
 
