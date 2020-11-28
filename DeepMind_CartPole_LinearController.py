@@ -38,7 +38,7 @@ theta = np.zeros(10001)
 # Define a linear control policy.
 def linear_control_policy(time_step):
   # Linear Control Gain
-  K = np.array([-2500.3, -351.2143, -4400, -820.3857])
+  K = np.array([-12.2595, -2.5696, -0.3670, -0.7391]) # MATLAB Values
   
   # State Variables
   x_dot = time_step.observation['velocity'][0]
