@@ -13,7 +13,6 @@ action_spec = env.action_spec()
 time_step = env.reset()
 
 # Initial Control Gains
-
 start_K = "K_1606431374.pickle" # None or filename
 
 if start_K is None:

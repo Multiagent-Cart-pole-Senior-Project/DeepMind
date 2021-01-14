@@ -10,35 +10,17 @@ observation_spec = env.observation_spec()
 time_step = env.reset()
 
 # Initialize Matricies
-K = np.array([ 1, 1, 1, 1])
-
 u = np.zeros(10001)
 x_dot = np.zeros(10001)
 theta_dot = np.zeros(10001)
 x = np.zeros(10001)
 theta = np.zeros(10001)
 
-# k = 0
-# kf = 10000
-
-# while k <= kf:
-  # x_dot[k] = time_step.observation['velocity'][0]
-  # theta_dot[k] = time_step.observation['velocity'][1]
-  # x[k] = time_step.observation['position'][0]
-  # theta[k] = time_step.observation['position'][1]
-  
-  # x_vec = np.array([[x[k]], [x_dot[k]], [theta[k]], [theta_dot[k]]])
-  # u[k] = np.matmul(-K,x_vec)
-  # time_step = env.step(u[k])
-  # print("reward = {}, discount = {}, observations = {}.".format(
-    # time_step.reward, time_step.discount, time_step.observation))  
-  # k = k + 1
-
 
 # Define a linear control policy.
 def linear_control_policy(time_step):
   # Linear Control Gain
-  K = np.array([-2500.3, -351.2143, -4400, -820.3857]) # MATLAB Values
+  K = np.array([-19.9809, -5.7783, -0.7339, -1.2783]) # MATLAB Values
   
   # State Variables
   x_dot = time_step.observation['velocity'][0]
@@ -53,6 +35,7 @@ def linear_control_policy(time_step):
   # Apply Control Input
   time_step = env.step(u)
   print(u) 
+  # print(theta_dot, x_dot)
   
   return u  
 
